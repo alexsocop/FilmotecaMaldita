@@ -19,17 +19,21 @@ Corre este comando:
 source venv/bin/activate
 
 
-#Si funciona, verás en tu terminal un cambio en el promp — comenzará con (venv), algo como esto:
+Si funciona, verás en tu terminal un cambio en el promp — comenzará con (venv), algo como esto:
 (venv) usuario@nombre_pc:~/Documents/Filmoteca Maldita$
 
 
 4. Ahora instala los paquetes dentro de venv venv
 con el entorno activo, puedes instalar de forma segura las dependencias requeridas:
 para descargar videos de youtube
+
 python -m pip install -U yt-dlp
+
 python -m pip install -U --pre "yt-dlp[default]"
+
 curl -fsSL https://deno.land/install.sh | sh
-#correr éste solo si saliste del entorno (virtual environment) 
+
+correr éste solo si saliste del entorno (virtual environment) 
 source ~/.bashrc
 
 ✅ Correr todo en un virtual environment (entorno virtual) hará que tu instalación de Python se mantenga limpia
