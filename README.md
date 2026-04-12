@@ -36,7 +36,7 @@ curl -fsSL https://deno.land/install.sh | sh
 correr éste solo si saliste del entorno (virtual environment) 
 source ~/.bashrc
 
-✅ Correr todo en un virtual environment (entorno virtual) hará que tu instalación de Python se mantenga limpia
+Correr todo en un virtual environment (entorno virtual) hará que tu instalación de Python se mantenga limpia
 
 5. corre el script
 python download_channel.py
@@ -47,7 +47,7 @@ Cuando acabes de descargar todos los videos, escribe:
 deactivate
 
 
-🧠 Bonus Tip
+Bonus Tip
 La próxima vez que quieras regresar a esta carpeta y quieras usar el script, sólo escribe:
 cd ~/Documents/"Filmoteca Maldita"
 source venv/bin/activate
