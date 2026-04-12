@@ -55,3 +55,11 @@ cd ~/Documents/"Filmoteca Maldita"
 source venv/bin/activate
 source ~/.bashrc
 python transcriber.py
+
+Extra, un script de bash que puedes usar para bajar un solo vídeo:
+python -m yt_dlp \
+  --cookies-from-browser firefox \
+  --remote-components ejs:github \
+  -f "bv*+ba/b" \
+  --merge-output-format mkv \
+  "https://www.youtube.com/URL-del-video"
