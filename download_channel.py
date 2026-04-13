@@ -38,38 +38,35 @@ def build_command(
     channel_url: str,
     output_dir: Path,
     archive_file: Path,
-    browser_cookies: str | None,
     ffmpeg_location: str | None,
+    cookies_file: Path | None,
 ) -> list[str]:
     cmd = [
         sys.executable,
         "-m",
         "yt_dlp",
-
         "--ignore-errors",
         "--continue",
         "--no-overwrites",
         "--retries", "10",
         "--fragment-retries", "10",
-
         "--download-archive", str(archive_file),
-
-        "--cookies-from-browser", browser_cookies or "firefox",
+        "--sleep-interval", "5",
+        "--max-sleep-interval", "10",
         "--remote-components", "ejs:github",
         "--js-runtimes", "deno",
-
         "-f", "bv*+ba/b",
         "--merge-output-format", "mkv",
-
         "--embed-metadata",
         "--write-thumbnail",
         "--convert-thumbnails", "jpg",
-
         "-o",
         str(output_dir / "%(channel|uploader)s/%(upload_date>%Y-%m-%d)s - %(title)s [%(id)s].%(ext)s"),
-
         channel_url,
     ]
+
+    if cookies_file is not None:
+        cmd.extend(["--cookies", str(cookies_file)])
 
     if ffmpeg_location:
         cmd.extend(["--ffmpeg-location", ffmpeg_location])
@@ -98,10 +95,8 @@ def main() -> int:
         help='Archive file to skip already-downloaded videos (default: "downloaded_archive.txt")',
     )
     parser.add_argument(
-        "--browser-cookies",
-        default="firefox",
-        choices=["chrome", "chromium", "edge", "firefox", "brave", "opera", "vivaldi", "safari"],
-        help='Browser to load cookies from (default: "firefox")',
+        "--cookies-file",
+        help="Optional path to an exported YouTube cookies.txt file for restricted videos",
     )
     parser.add_argument(
         "--ffmpeg-location",
@@ -114,6 +109,12 @@ def main() -> int:
     output_dir = Path(args.output_dir).expanduser().resolve()
     archive_file = Path(args.archive_file).expanduser().resolve()
 
+    cookies_file = None
+    if args.cookies_file:
+        cookies_file = Path(args.cookies_file).expanduser().resolve()
+        if not cookies_file.is_file():
+            raise SystemExit(f"Cookies file not found: {cookies_file}")
+
     output_dir.mkdir(parents=True, exist_ok=True)
     archive_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -123,8 +124,8 @@ def main() -> int:
         channel_url=channel_url,
         output_dir=output_dir,
         archive_file=archive_file,
-        browser_cookies=args.browser_cookies,
         ffmpeg_location=args.ffmpeg_location,
+        cookies_file=cookies_file,
     )
 
     print("\nRunning:\n")
