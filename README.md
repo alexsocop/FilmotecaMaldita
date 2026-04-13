@@ -63,3 +63,10 @@ python -m yt_dlp \
   -f "bv*+ba/b" \
   --merge-output-format mkv \
   "https://www.youtube.com/URL-del-video"
+
+
+Ejecución normal en canal público sin cookies:
+python download_channel.py
+
+Con cookies manualmente exportadas para videos restringidos:
+python download_channel.py --cookies-file /path/to/cookies.txt
