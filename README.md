@@ -70,3 +70,32 @@ python download_channel.py
 
 Con cookies manualmente exportadas para videos restringidos:
 python download_channel.py --cookies-file /path/to/cookies.txt
+
+
+Aquí tienes el flujo limpio en Firefox:
+
+Instala una extensión para exportar cookies que pueda guardar en formato Netscape cookies.txt. Una opción común en Firefox es Get cookies.txt LOCALLY, que indica que exporta en formato Netscape cookies.txt y que no envía información fuera del navegador.
+
+Activa esa extensión en ventanas privadas. Firefox desactiva las extensiones en la navegación privada de forma predeterminada, así que ve a Menú → Complementos y temas → Extensiones → haz clic en la extensión → Ejecutar en ventanas privadas → Permitir. Mozilla documenta exactamente esa ruta de configuración.
+
+Cierra cualquier ventana privada que ya tengas abierta. Después abre una sola ventana privada nueva, y en esa misma ventana y en esa misma pestaña:
+
+inicia sesión en YouTube
+ve a youtube.com/robots.txt
+exporta las cookies de youtube.com con la extensión
+guárdalas con un nombre como youtube_cookies.txt
+
+La documentación de yt-dlp para YouTube indica exactamente este método con ventana privada y dice que la pestaña de robots.txt debe ser la única pestaña privada/incógnito abierta.
+
+Cierra inmediatamente esa ventana privada después de exportar. No sigas usando después esa sesión privada de YouTube en el navegador, porque la idea precisamente es evitar que esas cookies roten.
+
+Ejecuta tu script con el archivo exportado:
+
+python download_channel.py --cookies-file /ruta/a/youtube_cookies.txt
+
+Úsalo sobre todo para los vídeos con restricción de edad o los casos en los que aparezca el mensaje “confirma que no eres un bot”. Para la descarga pública normal en bloque, tu script sin cookies sigue siendo la mejor opción por defecto. yt-dlp dice que las cookies solo son necesarias para contenido que requiere una cuenta, como vídeos con restricción de edad, privados o solo para miembros.
+
+Un par de notas pequeñas de seguridad:
+
+Permite la extensión en ventanas privadas solo si confías en ella. Mozilla advierte que las extensiones en ventanas privadas pueden acceder a los datos de esas sesiones.
+Después de exportar, puedes volver a la configuración de la extensión y cambiar Ejecutar en ventanas privadas otra vez a No permitir. Se hace desde la misma ruta de configuración de Firefox indicada arriba.
