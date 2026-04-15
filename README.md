@@ -72,6 +72,13 @@ Con cookies manualmente exportadas para videos restringidos:
 python download_channel.py --cookies-file /path/to/cookies.txt
 En este repositorio podrás encontrar un archivo de cookies genérico que podrías usar para correr el script, se llama: youtube_cookies.txt
 
+El archivo listar_mkv.sh es un script de bash que lista todos los archivos .mkv en la carpeta donde descargaste todos los videos de la Filmoteca Maldita, genera un archivo .txt Este es solo para llevar un control de los archivos que descargaste. 
+
+Debes asignar persmisos:
+chmod +x listar_mkv.sh
+y luego correr el script bash:
+./listar_mkv.sh
+
 
 Aquí tienes el flujo limpio en Firefox:
 
