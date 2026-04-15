@@ -70,6 +70,7 @@ python download_channel.py
 
 Con cookies manualmente exportadas para videos restringidos:
 python download_channel.py --cookies-file /path/to/cookies.txt
+En este repositorio podrás encontrar un archivo de cookies genérico que podrías usar para correr el script, se llama: youtube_cookies.txt
 
 
 Aquí tienes el flujo limpio en Firefox:
